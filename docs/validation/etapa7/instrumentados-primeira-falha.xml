@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="22" failures="1" errors="0" skipped="0" time="0.000" timestamp="2026-11-11T21:27:35" hostname="localhost">
+  <testsuite name="com.seuxico.sxgestao.AtendimentoFormTest" tests="4" failures="0" errors="0" skipped="0" time="14.297" timestamp="2026-11-11T21:27:35" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="cancelamentoExigeConfirmacaoEPreservaHistorico" classname="com.seuxico.sxgestao.AtendimentoFormTest" time="4.440" />
+    <testcase name="editarMantemSnapshotsEVinculosInativos" classname="com.seuxico.sxgestao.AtendimentoFormTest" time="2.256" />
+    <testcase name="rascunhoPreservadoAoRecusarDescarte" classname="com.seuxico.sxgestao.AtendimentoFormTest" time="2.062" />
+    <testcase name="registrarRepeticaoDescontoEPagamento" classname="com.seuxico.sxgestao.AtendimentoFormTest" time="5.539" />
+  </testsuite>
+  <testsuite name="com.seuxico.sxgestao.BackupTest" tests="3" failures="1" errors="0" skipped="0" time="0.556" timestamp="2026-11-11T21:27:35" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="rejeitaCorrupcaoVersaoTiposVinculosETotais" classname="com.seuxico.sxgestao.BackupTest" time="0.216" />
+    <testcase name="falhaDuranteInsercaoReverteTodaSubstituicaoMesmoAposReabrir" classname="com.seuxico.sxgestao.BackupTest" time="0.162" />
+    <testcase name="roundtripIntegralRecusaEReabertura" classname="com.seuxico.sxgestao.BackupTest" time="0.178">
+      <failure>java.lang.AssertionError: expected:&lt;AtendimentoCompleto(atendimento=Atendimento(id=848c08ca-dcd6-4387-844e-99c578f22133, barbeiroId=5496f64d-d048-4a05-a2a8-9702dd69dff4, efetivoUtcMs=1704333540000, fusoId=America/Sao_Paulo, offsetEfetivoSegundos=-7200, diaLocal=19725, semanaInicioLocal=19723, taxaAplicadaBp=3333, cancelado=false), itens=[ItemAtendimento(id=ebd5090a-7b2a-4b55-9248-ddc9886793d7, atendimentoId=848c08ca-dcd6-4387-844e-99c578f22133, servicoId=ae177429-9a79-4d92-a94e-fbedc9082af5, precoAplicadoCentavos=3000, descontoCentavos=0), ItemAtendimento(id=3871a915-d226-46e1-b803-e723f39afba8, atendimentoId=848c08ca-dcd6-4387-844e-99c578f22133, servicoId=ae177429-9a79-4d92-a94e-fbedc9082af5, precoAplicadoCentavos=3000, descontoCentavos=500)], pagamentos=[Pagamento(id=d3282e05-ad40-4894-bfbf-6541099cb523, atendimentoId=848c08ca-dcd6-4387-844e-99c578f22133, forma=PIX, valorCentavos=1000), Pagamento(id=cd8afe02-4426-49fa-aaa8-e1744a85ff4a, atendimentoId=848c08ca-dcd6-4387-844e-99c578f22133, forma=DEBITO, valorCentavos=4500)])&gt; but was:&lt;AtendimentoCompleto(atendimento=Atendimento(id=848c08ca-dcd6-4387-844e-99c578f22133, barbeiroId=5496f64d-d048-4a05-a2a8-9702dd69dff4, efetivoUtcMs=1704333540000, fusoId=America/Sao_Paulo, offsetEfetivoSegundos=-7200, diaLocal=19725, semanaInicioLocal=19723, taxaAplicadaBp=3333, cancelado=false), itens=[ItemAtendimento(id=3871a915-d226-46e1-b803-e723f39afba8, atendimentoId=848c08ca-dcd6-4387-844e-99c578f22133, servicoId=ae177429-9a79-4d92-a94e-fbedc9082af5, precoAplicadoCentavos=3000, descontoCentavos=500), ItemAtendimento(id=ebd5090a-7b2a-4b55-9248-ddc9886793d7, atendimentoId=848c08ca-dcd6-4387-844e-99c578f22133, servicoId=ae177429-9a79-4d92-a94e-fbedc9082af5, precoAplicadoCentavos=3000, descontoCentavos=0)], pagamentos=[Pagamento(id=cd8afe02-4426-49fa-aaa8-e1744a85ff4a, atendimentoId=848c08ca-dcd6-4387-844e-99c578f22133, forma=DEBITO, valorCentavos=4500), Pagamento(id=d3282e05-ad40-4894-bfbf-6541099cb523, atendimentoId=848c08ca-dcd6-4387-844e-99c578f22133, forma=PIX, valorCentavos=1000)])&gt;
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:120)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.seuxico.sxgestao.BackupTest$roundtripIntegralRecusaEReabertura$1.invokeSuspend(BackupTest.kt:46)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:101)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:263)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:95)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:69)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:47)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+	at com.seuxico.sxgestao.BackupTest.roundtripIntegralRecusaEReabertura(BackupTest.kt:36)
+</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="com.seuxico.sxgestao.CadastrosTest" tests="1" failures="0" errors="0" skipped="0" time="3.805" timestamp="2026-11-11T21:27:35" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="criarValidarEditarEInativar" classname="com.seuxico.sxgestao.CadastrosTest" time="3.805" />
+  </testsuite>
+  <testsuite name="com.seuxico.sxgestao.ComissoesTest" tests="2" failures="0" errors="0" skipped="0" time="2.667" timestamp="2026-11-11T21:27:35" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="confirmarDesfazerPreservaApuracaoERecebimentos" classname="com.seuxico.sxgestao.ComissoesTest" time="0.852" />
+    <testcase name="bloqueiosOrigemDestinoERetornoPreservamRascunhoSemSalvar" classname="com.seuxico.sxgestao.ComissoesTest" time="1.815" />
+  </testsuite>
+  <testsuite name="com.seuxico.sxgestao.ExampleInstrumentedTest" tests="1" failures="0" errors="0" skipped="0" time="0.002" timestamp="2026-11-11T21:27:35" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="useAppContext" classname="com.seuxico.sxgestao.ExampleInstrumentedTest" time="0.002" />
+  </testsuite>
+  <testsuite name="com.seuxico.sxgestao.NavigationTest" tests="1" failures="0" errors="0" skipped="0" time="1.886" timestamp="2026-11-11T21:27:35" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="bottomNavigationOpensAllScreensAndSurvivesRecreation" classname="com.seuxico.sxgestao.NavigationTest" time="1.886" />
+  </testsuite>
+  <testsuite name="com.seuxico.sxgestao.PersistenciaTest" tests="10" failures="0" errors="0" skipped="0" time="0.654" timestamp="2026-11-11T21:27:35" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="criacaoParcialNaoSobreviveAFalha" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.057" />
+    <testcase name="falhaNoMeioDaEdicaoReverteTudo" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.046" />
+    <testcase name="confirmacaoEEdicaoConcorrentesNaoExibemEstadoParcial" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.076" />
+    <testcase name="snapshotsInativosIdsQuitacaoECancelamento" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.091" />
+    <testcase name="dadosPermanecemDepoisDeReabrirBanco" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.096" />
+    <testcase name="novaAssociacaoUsaPrecoETaxaVigentes" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.057" />
+    <testcase name="integridadeReferencialNulabilidadeEChaves" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.027" />
+    <testcase name="bloqueioOrigemDestinoMesmoComComissaoZero" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.066" />
+    <testcase name="dataHistoricaPreservadaAoTrocarFusoDoAparelho" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.057" />
+    <testcase name="confirmacaoConcorrenteBloqueiosEDesfazimento" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.081" />
+  </testsuite>
+</testsuites>

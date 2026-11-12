@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.seuxico.sxgestao.FormatosTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-11-11T21:18:51.629Z" hostname="FERNANDO-NOTE" time="0.488">
+  <properties/>
+  <testcase name="entradaExataSemArredondamento" classname="com.seuxico.sxgestao.FormatosTest" time="0.488"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

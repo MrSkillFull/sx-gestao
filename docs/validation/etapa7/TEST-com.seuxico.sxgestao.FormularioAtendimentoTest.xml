@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.seuxico.sxgestao.FormularioAtendimentoTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-11T21:29:16.395Z" hostname="FERNANDO-NOTE" time="0.313">
+  <properties/>
+  <testcase name="gratisDatasInvalidasECadastrosInativos" classname="com.seuxico.sxgestao.FormularioAtendimentoTest" time="0.142"/>
+  <testcase name="repeticaoDescontosEDivisaoExata" classname="com.seuxico.sxgestao.FormularioAtendimentoTest" time="0.143"/>
+  <testcase name="correcaoPreservaPrecoETaxaHistoricosERevalidaNovaAssociacao" classname="com.seuxico.sxgestao.FormularioAtendimentoTest" time="0.028"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

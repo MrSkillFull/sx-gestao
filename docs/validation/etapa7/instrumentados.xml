@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="24" failures="0" errors="0" skipped="0" time="0.000" timestamp="2026-11-11T21:32:21" hostname="localhost">
+  <testsuite name="com.seuxico.sxgestao.AtendimentoFormTest" tests="4" failures="0" errors="0" skipped="0" time="12.959" timestamp="2026-11-11T21:32:21" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="cancelamentoExigeConfirmacaoEPreservaHistorico" classname="com.seuxico.sxgestao.AtendimentoFormTest" time="3.413" />
+    <testcase name="editarMantemSnapshotsEVinculosInativos" classname="com.seuxico.sxgestao.AtendimentoFormTest" time="1.983" />
+    <testcase name="rascunhoPreservadoAoRecusarDescarte" classname="com.seuxico.sxgestao.AtendimentoFormTest" time="2.124" />
+    <testcase name="registrarRepeticaoDescontoEPagamento" classname="com.seuxico.sxgestao.AtendimentoFormTest" time="5.439" />
+  </testsuite>
+  <testsuite name="com.seuxico.sxgestao.BackupInterfaceTest" tests="1" failures="0" errors="0" skipped="0" time="0.730" timestamp="2026-11-11T21:32:21" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="validacaoPrecedeConfirmacaoERecusaPreservaBase" classname="com.seuxico.sxgestao.BackupInterfaceTest" time="0.730" />
+  </testsuite>
+  <testsuite name="com.seuxico.sxgestao.BackupTest" tests="4" failures="0" errors="0" skipped="0" time="0.760" timestamp="2026-11-11T21:32:21" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="rejeitaCorrupcaoVersaoTiposVinculosETotais" classname="com.seuxico.sxgestao.BackupTest" time="0.238" />
+    <testcase name="falhaDuranteInsercaoReverteTodaSubstituicaoMesmoAposReabrir" classname="com.seuxico.sxgestao.BackupTest" time="0.161" />
+    <testcase name="roundtripIntegralRecusaEReabertura" classname="com.seuxico.sxgestao.BackupTest" time="0.192" />
+    <testcase name="interrupcaoAntesDoCommitPreservaBaseERecusaEscritasConcorrentes" classname="com.seuxico.sxgestao.BackupTest" time="0.169" />
+  </testsuite>
+  <testsuite name="com.seuxico.sxgestao.CadastrosTest" tests="1" failures="0" errors="0" skipped="0" time="3.824" timestamp="2026-11-11T21:32:21" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="criarValidarEditarEInativar" classname="com.seuxico.sxgestao.CadastrosTest" time="3.824" />
+  </testsuite>
+  <testsuite name="com.seuxico.sxgestao.ComissoesTest" tests="2" failures="0" errors="0" skipped="0" time="2.670" timestamp="2026-11-11T21:32:21" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="confirmarDesfazerPreservaApuracaoERecebimentos" classname="com.seuxico.sxgestao.ComissoesTest" time="0.959" />
+    <testcase name="bloqueiosOrigemDestinoERetornoPreservamRascunhoSemSalvar" classname="com.seuxico.sxgestao.ComissoesTest" time="1.711" />
+  </testsuite>
+  <testsuite name="com.seuxico.sxgestao.ExampleInstrumentedTest" tests="1" failures="0" errors="0" skipped="0" time="0.000" timestamp="2026-11-11T21:32:21" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="useAppContext" classname="com.seuxico.sxgestao.ExampleInstrumentedTest" time="0.000" />
+  </testsuite>
+  <testsuite name="com.seuxico.sxgestao.NavigationTest" tests="1" failures="0" errors="0" skipped="0" time="1.782" timestamp="2026-11-11T21:32:21" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="bottomNavigationOpensAllScreensAndSurvivesRecreation" classname="com.seuxico.sxgestao.NavigationTest" time="1.782" />
+  </testsuite>
+  <testsuite name="com.seuxico.sxgestao.PersistenciaTest" tests="10" failures="0" errors="0" skipped="0" time="0.787" timestamp="2026-11-11T21:32:21" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="criacaoParcialNaoSobreviveAFalha" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.062" />
+    <testcase name="falhaNoMeioDaEdicaoReverteTudo" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.051" />
+    <testcase name="confirmacaoEEdicaoConcorrentesNaoExibemEstadoParcial" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.074" />
+    <testcase name="snapshotsInativosIdsQuitacaoECancelamento" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.125" />
+    <testcase name="dadosPermanecemDepoisDeReabrirBanco" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.134" />
+    <testcase name="novaAssociacaoUsaPrecoETaxaVigentes" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.060" />
+    <testcase name="integridadeReferencialNulabilidadeEChaves" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.025" />
+    <testcase name="bloqueioOrigemDestinoMesmoComComissaoZero" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.069" />
+    <testcase name="dataHistoricaPreservadaAoTrocarFusoDoAparelho" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.091" />
+    <testcase name="confirmacaoConcorrenteBloqueiosEDesfazimento" classname="com.seuxico.sxgestao.PersistenciaTest" time="0.096" />
+  </testsuite>
+</testsuites>

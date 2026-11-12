@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">SX Gestão</string>
+    <string name="inicio">Início</string>
+    <string name="atendimentos">Atendimentos</string>
+    <string name="cadastros">Cadastros</string>
+    <string name="configuracoes">Configurações</string>
+    <string name="inicio_description">Bem-vindo ao SX Gestão, da barbearia Seu Xico.</string>
+    <string name="atendimentos_description">Registro e histórico de atendimentos.</string>
+    <string name="cadastros_description">Barbeiros e serviços da barbearia.</string>
+    <string name="configuracoes_description">Backup e restauração dos dados locais.</string>
+    <string name="foundation_notice">Tela provisória · Em construção</string>
+</resources>

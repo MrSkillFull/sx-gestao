@@ -1,0 +1,388 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "ff706b6ae7aa6351bf1e90982627097d",
+    "entities": [
+      {
+        "tableName": "Barbeiro",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `nome` TEXT NOT NULL, `ativo` INTEGER NOT NULL, `proprietario` INTEGER NOT NULL, `taxa_comissao_bp` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nome",
+            "columnName": "nome",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ativo",
+            "columnName": "ativo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "proprietario",
+            "columnName": "proprietario",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "taxaComissaoBp",
+            "columnName": "taxa_comissao_bp",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "Servico",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `nome` TEXT NOT NULL, `ativo` INTEGER NOT NULL, `preco_centavos` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nome",
+            "columnName": "nome",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ativo",
+            "columnName": "ativo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "precoCentavos",
+            "columnName": "preco_centavos",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "Atendimento",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `barbeiro_id` TEXT NOT NULL, `efetivo_utc_ms` INTEGER NOT NULL, `fuso_id` TEXT NOT NULL, `offset_efetivo_segundos` INTEGER NOT NULL, `dia_local` INTEGER NOT NULL, `semana_inicio_local` INTEGER NOT NULL, `taxa_aplicada_bp` INTEGER NOT NULL, `cancelado` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`barbeiro_id`) REFERENCES `Barbeiro`(`id`) ON UPDATE RESTRICT ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "barbeiroId",
+            "columnName": "barbeiro_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "efetivoUtcMs",
+            "columnName": "efetivo_utc_ms",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fusoId",
+            "columnName": "fuso_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "offsetEfetivoSegundos",
+            "columnName": "offset_efetivo_segundos",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "diaLocal",
+            "columnName": "dia_local",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "semanaInicioLocal",
+            "columnName": "semana_inicio_local",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "taxaAplicadaBp",
+            "columnName": "taxa_aplicada_bp",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cancelado",
+            "columnName": "cancelado",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_Atendimento_barbeiro_id_semana_inicio_local_cancelado",
+            "unique": false,
+            "columnNames": [
+              "barbeiro_id",
+              "semana_inicio_local",
+              "cancelado"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Atendimento_barbeiro_id_semana_inicio_local_cancelado` ON `${TABLE_NAME}` (`barbeiro_id`, `semana_inicio_local`, `cancelado`)"
+          },
+          {
+            "name": "index_Atendimento_dia_local",
+            "unique": false,
+            "columnNames": [
+              "dia_local"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Atendimento_dia_local` ON `${TABLE_NAME}` (`dia_local`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Barbeiro",
+            "onDelete": "RESTRICT",
+            "onUpdate": "RESTRICT",
+            "columns": [
+              "barbeiro_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "ItemAtendimento",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `atendimento_id` TEXT NOT NULL, `servico_id` TEXT NOT NULL, `preco_aplicado_centavos` INTEGER NOT NULL, `desconto_centavos` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`atendimento_id`) REFERENCES `Atendimento`(`id`) ON UPDATE RESTRICT ON DELETE RESTRICT , FOREIGN KEY(`servico_id`) REFERENCES `Servico`(`id`) ON UPDATE RESTRICT ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "atendimentoId",
+            "columnName": "atendimento_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "servicoId",
+            "columnName": "servico_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "precoAplicadoCentavos",
+            "columnName": "preco_aplicado_centavos",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descontoCentavos",
+            "columnName": "desconto_centavos",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_ItemAtendimento_atendimento_id",
+            "unique": false,
+            "columnNames": [
+              "atendimento_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ItemAtendimento_atendimento_id` ON `${TABLE_NAME}` (`atendimento_id`)"
+          },
+          {
+            "name": "index_ItemAtendimento_servico_id",
+            "unique": false,
+            "columnNames": [
+              "servico_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ItemAtendimento_servico_id` ON `${TABLE_NAME}` (`servico_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Atendimento",
+            "onDelete": "RESTRICT",
+            "onUpdate": "RESTRICT",
+            "columns": [
+              "atendimento_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "Servico",
+            "onDelete": "RESTRICT",
+            "onUpdate": "RESTRICT",
+            "columns": [
+              "servico_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "Pagamento",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `atendimento_id` TEXT NOT NULL, `forma` TEXT NOT NULL, `valor_centavos` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`atendimento_id`) REFERENCES `Atendimento`(`id`) ON UPDATE RESTRICT ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "atendimentoId",
+            "columnName": "atendimento_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "forma",
+            "columnName": "forma",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valorCentavos",
+            "columnName": "valor_centavos",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_Pagamento_atendimento_id",
+            "unique": false,
+            "columnNames": [
+              "atendimento_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Pagamento_atendimento_id` ON `${TABLE_NAME}` (`atendimento_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Atendimento",
+            "onDelete": "RESTRICT",
+            "onUpdate": "RESTRICT",
+            "columns": [
+              "atendimento_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "PagamentoSemanal",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`barbeiro_id` TEXT NOT NULL, `semana_inicio_local` INTEGER NOT NULL, `valor_confirmado_centavos` INTEGER NOT NULL, `confirmado_em_utc_ms` INTEGER NOT NULL, PRIMARY KEY(`barbeiro_id`, `semana_inicio_local`), FOREIGN KEY(`barbeiro_id`) REFERENCES `Barbeiro`(`id`) ON UPDATE RESTRICT ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "barbeiroId",
+            "columnName": "barbeiro_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "semanaInicioLocal",
+            "columnName": "semana_inicio_local",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valorConfirmadoCentavos",
+            "columnName": "valor_confirmado_centavos",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "confirmadoEmUtcMs",
+            "columnName": "confirmado_em_utc_ms",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "barbeiro_id",
+            "semana_inicio_local"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "Barbeiro",
+            "onDelete": "RESTRICT",
+            "onUpdate": "RESTRICT",
+            "columns": [
+              "barbeiro_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ff706b6ae7aa6351bf1e90982627097d')"
+    ]
+  }
+}
