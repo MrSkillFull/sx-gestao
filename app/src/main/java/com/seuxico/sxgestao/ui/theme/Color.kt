@@ -2,18 +2,21 @@
 
 import androidx.compose.ui.graphics.Color
 
-internal val Orange = Color(0xFFFF9A52)
-internal val OnOrange = Color(0xFF231100)
-internal val Background = Color(0xFF121212)
-internal val Surface = Color(0xFF1E1E1E)
-internal val Foreground = Color(0xFFF4F1EF)
-internal val MutedForeground = Color(0xFFCFC4BC)
-internal val Outline = Color(0xFF423D3A)
-internal val OrangeContainer = Color(0xFF592B00)
-internal val OnOrangeContainer = Color(0xFFFFDCC0)
-internal val SurfaceVariant = Color(0xFF282828)
-internal val Error = Color(0xFFFFB4AB)
-internal val OnError = Color(0xFF690005)
+// Tons escuros de laranja mantêm a hierarquia dos textos sobre a base laranja.
+internal val Orange = Color(0xFF542000)
+internal val OnOrange = Color(0xFFFFFFFF)
+internal val Background = Color(0xFFFF8A24)
+internal val Surface = Color(0xFFFF9D46)
+internal val Foreground = Color(0xFF211005)
+internal val MutedForeground = Color(0xFF63300B)
+internal val Outline = Color(0xFF24140A)
+internal val OrangeContainer = Color(0xFF17120F)
+internal val OnOrangeContainer = Color(0xFFFFAD66)
+internal val SurfaceVariant = Color(0xFFFFB16B)
+internal val Error = Color(0xFF820B16)
+internal val OnError = Color(0xFFFFFFFF)
+internal val ErrorContainer = Color(0xFFFFDAD6)
+internal val OnErrorContainer = Color(0xFF410006)
 
 // Status Badges Colors
 internal val StatusGreenContainer = Color(0xFF1B381E)

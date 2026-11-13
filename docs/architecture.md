@@ -8,7 +8,10 @@ em `ui/components/GestaoViewModel.kt` injeta o repositório sobre o singleton
 Room. Conversão e formatação decimal ficam em `model/Formatos.kt`. Não foi
 alterado o esquema v1. Consulte `implementation-checklist.md` para evidências.
 Atendimentos possui formulário, histórico e detalhe, com ViewModels próprios.
-Início possui painel e detalhe semanal; Configurações contém SAF e backup.
+Início possui painel e detalhe semanal; Configurações contém SAF, backup e seleção de aparência.
+Os temas preto/laranja e laranja/preto são aplicados na Activity por `TemaViewModel`.
+`TemaRepository` guarda a preferência local em SharedPreferences, fora do backup
+financeiro e sem alterar o esquema Room. A escolha padrão é laranja/preto.
 `LocalGestaoRepository` injeta uma base isolada nos testes de navegação completa;
 a produção continua usando o singleton Room. Core library desugaring 2.1.5
 está configurado e foi exercitado nos testes API 24.

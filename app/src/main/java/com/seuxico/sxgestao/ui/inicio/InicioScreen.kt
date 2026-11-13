@@ -1,6 +1,7 @@
 package com.seuxico.sxgestao.ui.inicio
 
 import android.app.DatePickerDialog
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -11,10 +12,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import com.seuxico.sxgestao.ui.theme.SXGestaoTheme
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
@@ -54,11 +58,7 @@ fun InicioScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // App / Dashboard Title
-        SXGestaoTopBar(
-            titulo = "SX Gestão",
-            subtitulo = stringResource(R.string.inicio_description)
-        )
+        InicioCabecalho()
 
         // Action: Novo Atendimento
         Button(
@@ -376,6 +376,57 @@ fun InicioScreen(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
+            }
+        }
+    }
+}
+
+@Composable
+private fun InicioCabecalho() {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        // O nome da barbearia já é anunciado no texto de boas-vindas.
+        Image(
+            painter = painterResource(R.drawable.logo_seu_xico),
+            contentDescription = null,
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
+            modifier = Modifier
+                .width(128.dp)
+                .padding(8.dp)
+                .aspectRatio(982f / 811f)
+        )
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.app_name),
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Text(
+                text = stringResource(R.string.inicio_description),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
+}
+
+@Preview(name = "Claro · 320dp", widthDp = 320)
+@Preview(name = "Escuro · 320dp", widthDp = 320, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "Fonte ampliada · 320dp", widthDp = 320, fontScale = 2f)
+@Composable
+private fun InicioCabecalhoPreview() {
+    val escuro = androidx.compose.foundation.isSystemInDarkTheme()
+    SXGestaoTheme(tema = if (escuro) TemaAplicativo.PRETO else TemaAplicativo.LARANJA) {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            Column(Modifier.padding(16.dp)) {
+                InicioCabecalho()
             }
         }
     }

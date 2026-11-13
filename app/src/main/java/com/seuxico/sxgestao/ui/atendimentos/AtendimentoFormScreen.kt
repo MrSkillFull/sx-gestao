@@ -123,6 +123,7 @@ fun AtendimentoFormScreen(
                     nome = { "${it.nome}${if (it.ativo) "" else " (Inativo)"}" },
                     selecionar = { vm.alterar(form.copy(barbeiroId = it.id)) },
                     modifier = Modifier.focusRequester(foco("barbeiro")).focusable(),
+                    destacado = true,
                     enabled = !state.gravando
                 )
 
@@ -324,6 +325,8 @@ fun AtendimentoFormScreen(
                     opcoes = state.servicos.filter { it.ativo },
                     nome = { "${it.nome} · ${reais(it.precoCentavos)}" },
                     selecionar = { vm.alterar(form.copy(itens = form.itens + ItemForm(it.id))) },
+                    destacado = true,
+                    adicionar = true,
                     enabled = !state.gravando
                 )
 
@@ -397,6 +400,7 @@ fun AtendimentoFormScreen(
                             opcoes = FormaPagamento.entries,
                             nome = { it.rotulo() },
                             selecionar = { vm.alterar(form.copy(formaUnica = it)) },
+                            destacado = true,
                             enabled = !state.gravando
                         )
                         Text(
@@ -423,6 +427,7 @@ fun AtendimentoFormScreen(
                                             selecionar = { forma ->
                                                 vm.alterar(form.copy(partes = form.partes.map { if (it.id == parte.id) it.copy(forma = forma) else it }))
                                             },
+                                            destacado = true,
                                             enabled = !state.gravando
                                         )
 

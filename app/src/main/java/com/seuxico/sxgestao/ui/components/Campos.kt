@@ -1,11 +1,16 @@
 package com.seuxico.sxgestao.ui.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import com.seuxico.sxgestao.R
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.semantics.*
@@ -20,12 +25,52 @@ fun Erro(texto: String?) { if (texto != null) Text(texto, color = MaterialTheme.
 
 @Composable
 fun <T> Selecao(rotulo: String, valor: String, opcoes: List<T>, nome: (T) -> String,
-    selecionar: (T) -> Unit, modifier: Modifier = Modifier, enabled: Boolean = true) {
+    selecionar: (T) -> Unit, modifier: Modifier = Modifier, enabled: Boolean = true,
+    destacado: Boolean = false, adicionar: Boolean = false) {
     var aberto by remember { mutableStateOf(false) }
-    Column(modifier) {
-        Text(rotulo)
+    Column(modifier, verticalArrangement = Arrangement.spacedBy(if (destacado) 8.dp else 0.dp)) {
+        if (!adicionar) Text(rotulo)
         Box {
-            OutlinedButton(onClick = { aberto = true }, enabled = enabled, modifier = Modifier.fillMaxWidth().semantics { contentDescription = "$rotulo: ${valor.ifBlank { "não selecionado" }}" }) { Text(valor.ifBlank { "Selecionar $rotulo" }) }
+            val botaoModifier = Modifier.fillMaxWidth().semantics {
+                contentDescription = if (adicionar) rotulo else "$rotulo: ${valor.ifBlank { "não selecionado" }}"
+            }
+            if (destacado) {
+                OutlinedButton(
+                    onClick = { aberto = true },
+                    enabled = enabled,
+                    modifier = botaoModifier.heightIn(min = 52.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    border = BorderStroke(1.dp, if (enabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)),
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        containerColor = MaterialTheme.colorScheme.surface,
+                        contentColor = MaterialTheme.colorScheme.primary
+                    ),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp)
+                ) {
+                    if (adicionar) {
+                        Icon(painterResource(R.drawable.ic_add), contentDescription = null, modifier = Modifier.size(20.dp))
+                        Spacer(Modifier.width(8.dp))
+                    }
+                    Text(
+                        valor.ifBlank { "Selecionar $rotulo" },
+                        modifier = Modifier.weight(1f),
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    if (!adicionar) {
+                        Spacer(Modifier.width(8.dp))
+                        Icon(
+                            painterResource(R.drawable.ic_chevron_right),
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                }
+            } else {
+                OutlinedButton(onClick = { aberto = true }, enabled = enabled, modifier = botaoModifier) {
+                    Text(valor.ifBlank { "Selecionar $rotulo" })
+                }
+            }
             DropdownMenu(aberto, { aberto = false }) {
                 opcoes.forEach { opcao -> DropdownMenuItem(text = { Text(nome(opcao)) }, onClick = { aberto = false; selecionar(opcao) }) }
             }

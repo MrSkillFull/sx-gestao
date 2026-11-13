@@ -40,6 +40,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.seuxico.sxgestao.R
+import com.seuxico.sxgestao.model.TemaAplicativo
 import com.seuxico.sxgestao.ui.atendimentos.AtendimentosScreen
 import com.seuxico.sxgestao.ui.atendimentos.AtendimentoFormScreen
 import com.seuxico.sxgestao.ui.atendimentos.AtendimentoViewModel
@@ -62,12 +63,16 @@ private enum class Destination(
 }
 
 @Composable
-fun SXGestaoApp(repository: GestaoRepository? = null) {
-    CompositionLocalProvider(LocalGestaoRepository provides repository) { AppContent() }
+fun SXGestaoApp(
+    repository: GestaoRepository? = null,
+    tema: TemaAplicativo = TemaAplicativo.LARANJA,
+    selecionarTema: (TemaAplicativo) -> Unit = {},
+) {
+    CompositionLocalProvider(LocalGestaoRepository provides repository) { AppContent(tema, selecionarTema) }
 }
 
 @Composable
-private fun AppContent() {
+private fun AppContent(tema: TemaAplicativo, selecionarTema: (TemaAplicativo) -> Unit) {
     val geracao by EstadoBase.geracao.collectAsStateWithLifecycle()
     val restaurando by EstadoBase.restaurando.collectAsStateWithLifecycle()
     var ultimaGeracao by rememberSaveable { mutableLongStateOf(geracao) }
@@ -78,14 +83,14 @@ private fun AppContent() {
             android.widget.Toast.makeText(context, "Backup restaurado com sucesso.", android.widget.Toast.LENGTH_LONG).show()
         }
     }
-    key(geracao) { Navegacao() }
+    key(geracao) { Navegacao(tema, selecionarTema) }
     if (restaurando) Dialog(onDismissRequest = {}, properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)) {
         Surface { Column(Modifier.padding(24.dp)) { CircularProgressIndicator(); Text("Restaurando backup…") } }
     }
 }
 
 @Composable
-private fun Navegacao() {
+private fun Navegacao(tema: TemaAplicativo, selecionarTema: (TemaAplicativo) -> Unit) {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val abrirComissao: (String, Long) -> Unit = { barbeiro, semana -> navController.navigate("comissao/$barbeiro/$semana") }
@@ -146,7 +151,7 @@ private fun Navegacao() {
                 ComissaoScreen(requireNotNull(entry.arguments?.getString("barbeiro")), requireNotNull(entry.arguments?.getString("semana")).toLong(), voltar = { navController.popBackStack() })
             }
             composable(Destination.Cadastros.route) { CadastrosScreen() }
-            composable(Destination.Configuracoes.route) { ConfiguracoesScreen() }
+            composable(Destination.Configuracoes.route) { ConfiguracoesScreen(tema = tema, selecionarTema = selecionarTema) }
         }
     }
 }

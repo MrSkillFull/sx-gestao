@@ -18,10 +18,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.seuxico.sxgestao.R
+import com.seuxico.sxgestao.model.TemaAplicativo
 import com.seuxico.sxgestao.ui.components.*
 
 @Composable
-fun ConfiguracoesScreen(fornecido: ConfiguracoesViewModel? = null) {
+fun ConfiguracoesScreen(
+    fornecido: ConfiguracoesViewModel? = null,
+    tema: TemaAplicativo = TemaAplicativo.LARANJA,
+    selecionarTema: (TemaAplicativo) -> Unit = {},
+) {
     val context = LocalContext.current.applicationContext
     val vm: ConfiguracoesViewModel = fornecido ?: gestaoViewModel { ConfiguracoesViewModel(it, context) }
     val state by vm.state.collectAsStateWithLifecycle()
@@ -39,6 +44,8 @@ fun ConfiguracoesScreen(fornecido: ConfiguracoesViewModel? = null) {
             titulo = "Configurações",
             subtitulo = stringResource(R.string.configuracoes_description)
         )
+
+        SeletorTema(tema = tema, selecionar = selecionarTema)
 
         Card(
             modifier = Modifier.fillMaxWidth(),
