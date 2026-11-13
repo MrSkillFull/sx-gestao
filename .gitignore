@@ -15,3 +15,14 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Logs e relatorios gerados
+*.log
+/docs/validation/
+
+# Preferencias locais do Android Studio
+/.idea/deploymentTargetSelector.xml
+/.idea/deviceManager.xml
+
+# Artefatos de release
+/app/release/
