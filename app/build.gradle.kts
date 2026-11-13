@@ -23,8 +23,8 @@ android {
     buildTypes {
         release {
             optimization {
-                enable = true
-                packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
+                // Evita IllegalAccessError na inicialização com otimização seletiva.
+                enable = false
             }
         }
     }
