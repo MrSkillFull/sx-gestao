@@ -60,7 +60,9 @@ class MainActivity : ComponentActivity() {
                 }
                 SXGestaoApp(tema = tema, selecionarTema = vm::selecionar)
                 LaunchedEffect(estadoAtualizacao) {
-                    if (estadoAtualizacao == AtualizacaoViewModel.EstadoAtualizacao.Nenhuma) {
+                    if (estadoAtualizacao == AtualizacaoViewModel.EstadoAtualizacao.Nenhuma &&
+                        atualizacaoVm.verificacaoConcluidaSemAtualizacao
+                    ) {
                         snackbarHostState.showSnackbar("Não foi possível encontrar atualizações disponíveis.", withDismissAction = false)
                     }
                 }
