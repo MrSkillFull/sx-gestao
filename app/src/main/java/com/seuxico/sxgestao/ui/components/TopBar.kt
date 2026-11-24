@@ -1,16 +1,17 @@
 package com.seuxico.sxgestao.ui.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.seuxico.sxgestao.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SXGestaoTopBar(
     titulo: String = "SX Gestão",
@@ -18,19 +19,48 @@ fun SXGestaoTopBar(
     subtitulo: String? = null,
     voltar: (() -> Unit)? = null
 ) {
-    TopAppBar(
-        title = {
+    Surface(
+        color = MaterialTheme.colorScheme.surface,
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Box(modifier = Modifier.fillMaxWidth()) {
+            // Botão voltar no canto esquerdo
+            if (voltar != null) {
+                IconButton(
+                    onClick = voltar,
+                    modifier = Modifier.align(Alignment.CenterStart)
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_back),
+                        contentDescription = "Voltar",
+                        tint = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
+
+            // Logo + texto centralizados verticalmente
             Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = if (voltar != null) 48.dp else 0.dp,
+                        top = 8.dp,
+                        bottom = 8.dp
+                    ),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_logo),
-                    contentDescription = "Logo SX Gestão",
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(28.dp)
+                Image(
+                    painter = painterResource(R.drawable.logo_seu_xico),
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
+                    modifier = Modifier
+                        .width(128.dp)
+                        .aspectRatio(982f / 811f)
                 )
-                Column {
+                Column(
+                    verticalArrangement = Arrangement.Center
+                ) {
                     Text(
                         text = titulo,
                         style = MaterialTheme.typography.titleMedium,
@@ -46,22 +76,6 @@ fun SXGestaoTopBar(
                     }
                 }
             }
-        },
-        navigationIcon = {
-            if (voltar != null) {
-                IconButton(onClick = voltar) {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_back),
-                        contentDescription = "Voltar",
-                        tint = MaterialTheme.colorScheme.onSurface
-                    )
-                }
-            }
-        },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.surface,
-            titleContentColor = MaterialTheme.colorScheme.onSurface
-        ),
-        modifier = modifier
-    )
+        }
+    }
 }
