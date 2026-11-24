@@ -25,6 +25,8 @@ class AtualizacaoViewModel(
     private val _estado = MutableStateFlow<EstadoAtualizacao>(EstadoAtualizacao.Nenhuma)
     val estado: StateFlow<EstadoAtualizacao> = _estado.asStateFlow()
     val info: InfoAtualizacao? get() = infoAtualizacao
+    var verificacaoConcluidaSemAtualizacao: Boolean = false
+        private set
     private var infoAtualizacao: InfoAtualizacao? = null
 
     fun verificar(versaoAtual: String) {
@@ -33,6 +35,7 @@ class AtualizacaoViewModel(
         viewModelScope.launch {
             val info = repository.verificarAtualizacao(versaoAtual)
             infoAtualizacao = info
+            verificacaoConcluidaSemAtualizacao = info == null
             _estado.value = info?.let(EstadoAtualizacao::Disponivel) ?: EstadoAtualizacao.Nenhuma
         }
     }
